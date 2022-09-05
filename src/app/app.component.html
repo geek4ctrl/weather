@@ -1,75 +1,77 @@
-<mat-card style="background-color: black; color: white">
-    <h1>Weather Application</h1>
+<mat-card class="color-styling mb">
+  <h1>Weather Application</h1>
 </mat-card>
 
-<br>
-<br>
-<br>
+<div class="content-spacing">
+  <h1>Today's Weather</h1>
 
-<div style="padding-left: 50px; padding-right: 50px;">
+  <form
+    #searcPlace="ngForm"
+    (ngSubmit)="onSubmit(searcPlace.value)"
+    class="example-form mb"
+  >
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Search any city</mat-label>
 
-        <h1>Today's Weather</h1>
+      <input
+        type="text"
+        name="search"
+        matInput
+        placeholder="City"
+        value=""
+        [(ngModel)]="search"
+      />
+    </mat-form-field>
+    <mat-icon>search</mat-icon>
 
-        <form #searcPlace="ngForm" (ngSubmit)="onSubmit(searcPlace.value)" class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Search any city</mat-label>
+    <div class="example-button-row">
+      <button mat-raised-button class="color-styling">Search</button>
+    </div>
+  </form>
 
-                <input type="text" name="search" matInput placeholder="City" value="" [(ngModel)] = "search">
-            </mat-form-field>
-            <mat-icon>search</mat-icon>
+  <div *ngIf="isWeatherShown">
+    <mat-card>
+      <div>Country: {{ requestedWeatherObject?.location.country }}</div>
 
-            <div class="example-button-row">
-                <button mat-raised-button style="background-color: black; color: white">Search</button>
-            </div>
-        </form>
+      <div>City: {{ requestedWeatherObject?.location.name }}</div>
 
-        <br>
-        <br>
-        <br>
+      <div>
+        {{ requestedWeatherObject?.current.feelslike_c }} Degrees Celcius
+      </div>
 
-        <div *ngIf = "isWeatherShown">
-            <mat-card>
-                <div> Country:  {{ requestedWeatherObject?.location.country }} </div>
+      <br />
+      <button mat-raised-button (click)="saveItem(requestedWeatherObject)">
+        Bookmark
+      </button>
+    </mat-card>
+  </div>
 
-                <div>  City:  {{ requestedWeatherObject?.location.name }} </div>
+  <div *ngIf="!isWeatherShown" class="mb">
+    <mat-card> Please search for something here... </mat-card>
+  </div>
 
-                <div> {{ requestedWeatherObject?.current.feelslike_c }}  Degrees Celcius </div>
+  <div class="content-alignment">
+    <h1>Bookmarks</h1>
 
-                <br>
-                <button mat-raised-button (click)="saveItem(requestedWeatherObject)">Bookmark</button>
-            </mat-card>
-        </div>
+    <button
+      mat-raised-button
+      (click)="clearBookmarks()"
+      class="button-styling mb"
+    >
+      Clear
+    </button>
+  </div>
 
-        <div *ngIf = "!isWeatherShown">
-            <mat-card>
-                Please search for something here...
-            </mat-card>
-        </div>
+  <div>
+    <ng-container *ngFor="let bookmark of allParsedBookmarks">
+      <mat-card class="card-styling">
+        <div>Country: {{ bookmark.location.country }}</div>
 
-        <br>
-        <br>
-        <br>
+        <div>City: {{ bookmark?.location.name }}</div>
 
-        <div style="display: flex; flex-direction: row; justify-content: space-between">
-            <h1>Bookmarks</h1>
-
-            <button mat-raised-button (click)="clearBookmarks()" style="background-color: grey; color: white">Clear</button>
-        </div>
-
-         <br>
-
-        <div>
-            <ng-container *ngFor="let bookmark of allParsedBookmarks">
-                <mat-card style="background-color: #F6F6F6; border: 0.1px solid black;">
-                    <div>  Country:  {{ bookmark.location.country }} </div>
-
-                    <div> City:  {{ bookmark?.location.name }}  </div>
-
-                    <div> {{ bookmark?.current.feelslike_c }}  Degrees Celcius </div>
-                </mat-card>
-                <br>
-            </ng-container>
-        </div>
-
+        <div>{{ bookmark?.current.feelslike_c }} Degrees Celcius</div>
+      </mat-card>
+      <br />
+    </ng-container>
+  </div>
 </div>
-

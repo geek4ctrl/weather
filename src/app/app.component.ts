@@ -9,13 +9,10 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit {
   title = 'weather';
-  allTheInfo: any;
-  allTheWeatherInfo: any;
 
-  weatherObject: any;
   requestedWeatherObject: any;
 
-  search: any;
+  search: string = '';
   isWeatherShown = false;
 
   allBookmarks: any = [];

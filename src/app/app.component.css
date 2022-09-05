@@ -1,3 +1,33 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.color-styling {
+  background-color: black;
+  color: white;
+}
+
+.content-spacing {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.mb {
+  margin-bottom: 2rem;
+}
+
+.content-alignment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
+
+.button-styling {
+  background-color: grey;
+  color: white
+}
+
+.card-styling {
+  background-color: #F6F6F6;
+  border: 0.1px solid black;
+}
